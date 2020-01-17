@@ -1,7 +1,9 @@
 // Imports
 const AWS = require('aws-sdk')
 
-AWS.config.update({ region: '/* TODO: Add your regions */' })
+AWS.config.update({
+  region: 'us-east-1'
+})
 
 // Declare local variables
 const ec2 = new AWS.EC2()
@@ -10,10 +12,10 @@ const keyName = 'hamster_key'
 const instanceId = '/* TODO: Add the instance Id to stop */'
 
 stopInstance(instanceId)
-.then(() => createInstance(sgName, keyName))
-.then((data) => console.log('Created instance with:', data))
+  .then(() => createInstance(sgName, keyName))
+  .then((data) => console.log('Created instance with:', data))
 
-function createInstance (sgName, keyName) {
+function createInstance(sgName, keyName) {
   const params = {
     ImageId: '/* TODO: Add ami id for aws linux */',
     InstanceType: 't2.micro',
@@ -33,9 +35,9 @@ function createInstance (sgName, keyName) {
   })
 }
 
-function stopInstance (instanceId) {
+function stopInstance(instanceId) {
   const params = {
-    InstanceIds: [ instanceId ]
+    InstanceIds: [instanceId]
   }
 
   return new Promise((resolve, reject) => {
